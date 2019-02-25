@@ -17,7 +17,7 @@ char * stradd(char *origin, char *addition){
 int strfind(char *substr, char *str3){
     if(strstr( str3, substr) != NULL) {
         printf("True");
-        retunr 1;
+        return 1;
     }
     else{
         printf("False");

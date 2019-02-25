@@ -1,0 +1,127 @@
+diff --git a/challenges/chal2/dir-scan.go b/challenges/chal2/dir-scan.go
+index 9843134..a72675e 100644
+--- a/challenges/chal2/dir-scan.go
++++ b/challenges/chal2/dir-scan.go
+@@ -2,20 +2,57 @@ package main
+ 
+ import (
+ 	"fmt"
++	"log"
+ 	"os"
++	"path/filepath"
+ )
+ 
+-// scanDir stands for the directory scanning implementation
+-func scanDir(dir string) error {
+-	return nil
++type Counter struct {
++	count int
+ }
+ 
+ func main() {
+-
+-	if len(os.Args) < 2 {
+-		fmt.Println("Usage: ./dir-scan <directory>")
+-		os.Exit(1)
++	var root string
++	if len(os.Args) == 1 {
++		log.Fatal("No path given, Please specify path.")
++		return
++	}
++	if root = os.Args[1]; root == "" {
++		log.Fatal("No path given, Please specify path.")
++		return
+ 	}
++	fmt.Printf("Path File: %v\n", os.Args[1])
++	// filepath.Walk
++	files, err := FilePathWalkDir(root)
++	if err != nil {
++		panic(err)
++	}
++	fmt.Printf("Directories =%d\n", len(files))
++	/*
++		if err.Error() == "Permission denied" {
++			counter := Counter{1}
++			counter.increment()
++			fmt.Printf("Permission denied files:%d\n", counter.increment())
++		}
++	*/
++
++	//for _, file := range files {
++	//fmt.Println(file)
++	//}
++}
++func FilePathWalkDir(root string) ([]string, error) {
++	var files []string
++	err := filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
++		if !info.IsDir() {
++			files = append(files, path)
++		}
++
++		return nil
++	})
++
++	return files, err
++}
+ 
+-	scanDir(os.Args[1])
++func (self *Counter) increment() {
++	self.count++
+ }
+diff --git a/challenges/chal2/dmesg-analyzer.c b/challenges/chal2/dmesg-analyzer.c
+index aaa0e93..2586349 100644
+--- a/challenges/chal2/dmesg-analyzer.c
++++ b/challenges/chal2/dmesg-analyzer.c
+@@ -1,25 +1,46 @@
+ #include <stdio.h>
++#include <stdio.h>
++#include <fcntl.h>
++#include <unistd.h>
++#include <string.h>
++#include <stdlib.h>
+ 
++#define Error 1
+ #define REPORT_FILE "report.txt"
+ 
+ void analizeLog(char *logFile, char *report);
+ 
+-int main(int argc, char **argv) {
++int main(int argc, char *argv[]) {
++	if(argc == 2){
++    	int fd1 = open(argv[1], O_RDONLY);
++    	if (fd1 < 0){
++        	printf("Couldn't open file:  %s\n", argv[1]);
++            return Error;
++       }else{
++		int sz; 
++        char *c = (char *) calloc(200, sizeof(char)); 
++        sz = read(fd1, c, 20); 
++
++        while ( read(fd1, c, 20) != 0) {
++            printf("%s", c);
++        }
++
++    	}
++        close(fd1);
++	}
+ 
+-    if (argc < 2) {
+-	printf("Usage:./dmesg-analizer.o logfile.txt\n");
+-	return 1;
+-    }
+ 
+     analizeLog(argv[1], REPORT_FILE);
+ 
++
++
+     return 0;
+ }
+ 
+ void analizeLog(char *logFile, char *report) {
+     printf("Generating Report from: [%s] log file\n", logFile);
+ 
+-    // Implement your solution here.
++   
+ 
+     printf("Report is generated at: [%s]\n", report);
+ }
