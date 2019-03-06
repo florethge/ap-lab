@@ -30,13 +30,12 @@ int panicf(const char *format, ...)
 - Coding best practices implementation will be also considered.
 
 #### Running the Code:
- //To Compile
-gcc testLogger.c logger.c -o testLogger
+gcc testLogger.c logger.c -o testLogger &nbsp;
 ./testLogger
  
 
 #### Expected Output:
-22:57:47 INFO Test Logger, General information. 
-22:57:47 WARN Test Logger, Warning. 
-22:57:47 ERROR Test Logger, Error. 
-22:57:47 PANIC Test Logger, Panic.
+22:57:47 INFO Test Logger, General information. &nbsp;
+22:57:47 WARN Test Logger, Warning. &nbsp;
+22:57:47 ERROR Test Logger, Error. &nbsp;
+22:57:47 PANIC Test Logger, Panic. &nbsp;
