@@ -30,7 +30,7 @@ int panicf(const char *format, ...)
 - Coding best practices implementation will be also considered.
 
 #### Running the Code:
-gcc testLogger.c logger.c -o testLogger &nbsp;
+gcc testLogger.c logger.c -o testLogger </br>
 ./testLogger
  
 
