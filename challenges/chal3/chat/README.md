@@ -23,39 +23,21 @@ Requirements
 - Before submitting you code, make sure it's compiling and running correctly.
 
 
-Sample IRC Server output
+Sample IRC Server Running
 ------------------------
 
 
 ```
 # go run server.go -host localhost -port 9000
-irc-server > Simple IRC Server started at localhost:9000
-irc-server > Ready for receiving new clients
-irc-server > New connected user [user1]
-irc-server > New connected user [user2]
-irc-server > [user1] left
-
-```
-
-Sample 2 IRC clients output
----------------------------
-```
-# go run client.go -user user1 -server localhost:9000
-irc-server > Welcome to the Simple IRC Server
-irc-server > Your user [user1] is successfully logged
-user1 > Hi
-^C
+on one terminal for server
 ```
 
 ```
-# go run client.go -user user2 -server localhost:9000
-irc-server > Welcome to the Simple IRC Server
-irc-server > Your user [user2] is successfully logged
-user2 >
-user1 > Hi
-user2 >
-irc-server > [user1] left
+# go run client.go -server localhost:9000
+on other terminals as many as you need for clients
 ```
+
+
 
 Sample Sub-Commands output
 --------------------------
