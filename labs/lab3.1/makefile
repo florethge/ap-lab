@@ -1,2 +1,2 @@
 all:
-		gcc testLogger.c logger.c -o testLogger
+		gcc logger.c logger.c -o logger
