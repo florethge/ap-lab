@@ -10,8 +10,7 @@ import (
 type keyboardMover struct {
 	container *element
 	speed     float64
-
-	sr *spriteRenderer
+	sr        *spriteRenderer
 }
 
 func newKeyboardMover(container *element, speed float64) *keyboardMover {
@@ -40,7 +39,7 @@ func (mover *keyboardMover) onUpdate() error {
 			mover.container.position.x += mover.speed * delta
 		}
 	}
-
+	mover.container.collisions[0].center = mover.container.position
 	return nil
 }
 
@@ -71,10 +70,8 @@ func (shooter *keyboardShooter) onUpdate() error {
 
 	if keys[sdl.SCANCODE_SPACE] == 1 {
 		if time.Since(shooter.lastShot) >= shooter.cooldown {
-			shooter.shoot(pos.x, pos.y-20)
-			//shooter.shoot(pos.x+25, pos.y-20)
-			//shooter.shoot(pos.x-25, pos.y-20)
 
+			shooter.shoot(pos.x, pos.y-20)
 			shooter.lastShot = time.Now()
 		}
 	}
